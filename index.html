@@ -26,7 +26,10 @@ function calculate() {
   }
 }
 
-calculate();
+window.onload = function() {
+  calculate();
+};
+
     </script>
   </head>
   <body>
@@ -36,7 +39,7 @@ calculate();
     <h2 id="type-h2">Heading 2 is <span id="value-h2"></span></h2>
     <h3 id="type-h3">Heading 3 is <span id="value-h3"></span></h3>
     <h4 id="type-h4">Heading 4 is <span id="value-h4"></span></h4>
-    <div id="type-subheading">Subheading is <span id="value-subheading"></span></div>
+    <h5 id="type-subheading">Subheading is <span id="value-subheading"></span></h5>
     <p id="type-body">Body and paragraph is <span id="value-body"></span>.</p>
   </body>
 </html>
