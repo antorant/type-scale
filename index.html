@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+
+var sizes = {};
+function calculate() {
+  var base = document.getElementById('base').value;
+  sizes.body = base * 1;
+  sizes.h1 = base * 3;
+  sizes.h2 = base * 2;
+  sizes.h3 = base * 1.5;
+  sizes.h4 = base * .75;
+  sizes.subheading = base * 1.125;
+
+  console.log(sizes);
+
+  // document.getElementById('type-h1').style.fontSize = sizes.h1+'px';
+
+  for (var key in sizes) {
+    if (sizes.hasOwnProperty(key)) {
+      console.log(key + " -> " + sizes[key]);
+      document.getElementById('type-'+key).style.fontSize = sizes[key]+'px';
+      document.getElementById('value-'+key).innerHTML = sizes[key]+'px';
+    }
+  }
+}
+
+calculate();
+    </script>
+  </head>
+  <body>
+    <input type="number" id="base" value="16" onchange="calculate()"/>
+
+    <h1 id="type-h1">Heading 1 is <span id="value-h1"></span></h1>
+    <h2 id="type-h2">Heading 2 is <span id="value-h2"></span></h2>
+    <h3 id="type-h3">Heading 3 is <span id="value-h3"></span></h3>
+    <h4 id="type-h4">Heading 4 is <span id="value-h4"></span></h4>
+    <div id="type-subheading">Subheading is <span id="value-subheading"></span></div>
+    <p id="type-body">Body and paragraph is <span id="value-body"></span>.</p>
+  </body>
+</html>
