@@ -6,6 +6,8 @@
 // objects for CSS properties per element type
 var sizes = {};
 var lineHeights = {};
+var f = {};
+var margins = {};
 
 // this function rounds a number to the nearest multiple of 8
 function roundTo8(initial) {
@@ -23,50 +25,78 @@ function calculate() {
   // get the base size from the control
   var base = document.getElementById('base').value;
 
+  // set reusable margin values
+  margins.large = roundTo8(base * 3);
+  margins.medium = roundTo8(base * 1.5);
+  margins.small = roundTo8(base);
+
   // set font size factors
   // TODO round to integers?
-  sizes.body = base * 1;
-  sizes.h1 = base * 3;
-  sizes.h2 = base * 2;
-  sizes.h3 = base * 1.5;
-  sizes.h4 = base * .75;
-  sizes.subheading = base * 1;
+  f.body = {};
+  f.body.fontSize = base * 1;
+  f.body.lineHeight = roundTo8(f.body.fontSize * 1.75);
+  f.body.marginTop = margins.large;
+  f.body.marginBottom = margins.large;
 
-  // set line-height factors
-  lineHeights.body = roundTo8(sizes.body * 1.75);
-  lineHeights.h1 = roundTo8(sizes.h1 * 1);
-  lineHeights.h2 = roundTo8(sizes.h2 * 1);
-  lineHeights.h3 = roundTo8(sizes.h3 * 1);
-  lineHeights.h4 = roundTo8(sizes.h4 * 1);
-  lineHeights.subheading = roundTo8(sizes.subheading * 1);
+  f.h1 = {};
+  f.h1.fontSize = base * 3;
+  f.h1.lineHeight = roundTo8(f.h1.fontSize * 1);
+  f.h1.marginTop = margins.large;
+  f.h1.marginBottom = margins.medium;
 
-   // TODO margins
+  f.h2 = {};
+  f.h2.fontSize = base * 2;
+  f.h2.lineHeight = roundTo8(f.h2.fontSize * 1);
+  f.h2.marginTop = margins.large;
+  f.h2.marginBottom = margins.medium;
 
-  // loop through each type of element
-  for (var key in sizes) {
-    // skip loop if the property is from prototype
-    if (!sizes.hasOwnProperty(key)) continue;
+  f.h3 = {};
+  f.h3.fontSize = base * 1.5;
+  f.h3.lineHeight = roundTo8(f.h3.fontSize * 1);
+  f.h3.marginTop = margins.large;
+  f.h3.marginBottom = margins.small;
 
-    elements = document.getElementsByClassName('type-'+key);
-    valueSpans = document.getElementsByClassName('value-'+key);
+  f.h4 = {};
+  f.h4.fontSize = base * .75;
+  f.h4.lineHeight = roundTo8(f.h4.fontSize * 1);
+  f.h4.marginTop = margins.large;
+  f.h4.marginBottom = margins.small;
 
-    // loop through value spans...
-    for (var i in valueSpans) {
-      // skip loop if the property is from prototype
-      if (!valueSpans.hasOwnProperty(i)) continue;
+  f.subheading = {};
+  f.subheading.fontSize = base * 1;
+  f.subheading.lineHeight = roundTo8(f.subheading.fontSize * 1);
+  f.subheading.marginTop = -margins.small;
+  f.subheading.marginBottom = margins.medium;
 
-      // ... apply the value to each span
-      valueSpans[i].innerHTML = key+':'+sizes[key]+'/'+lineHeights[key];
-    }
+  // loop through each type
+  for (var type in f) {
 
-    // loop through elements...
-    for (var i in elements) {
-      // skip loop if the property is from prototype
-      if (!elements.hasOwnProperty(i)) continue;
+    // loop through each property
+    for (var property in f[type]) {
 
-      // ... apply the value to each span
-      elements[i].style.fontSize = sizes[key]+'px';
-      elements[i].style.lineHeight = lineHeights[key]+'px';
+      // get the relevant DOM elements to style
+      elements = document.getElementsByClassName('type-'+type);
+
+      // loop through elements...
+      for (var i in elements) {
+        // skip loop if the property is from prototype
+        if (!elements.hasOwnProperty(i)) continue;
+
+        // apply the property to the element
+        elements[i].style[property] = f[type][property]+'px';
+      }
+
+      // get the relevant DOM elements to add notation
+      valueSpans = document.getElementsByClassName('value-'+type);
+
+      // loop through value spans...
+      for (var i in valueSpans) {
+        // skip loop if the property is from prototype
+        if (!valueSpans.hasOwnProperty(i)) continue;
+
+        // ... apply the value to each span
+        valueSpans[i].innerHTML =   type+':'+f[type].fontSize+'/'+f[type].lineHeight;
+      }
     }
   }
 }
