@@ -3,25 +3,70 @@
     <link rel="stylesheet" href="css/style.css" />
     <script>
 
+// objects for CSS properties per element type
 var sizes = {};
+var lineHeights = {};
+
+// this function rounds a number to the nearest multiple of 8
+function roundTo8(initial) {
+  // correct upwards if not exactly on unit
+  initial % 8 != 0 ? correction = 8 : correction = 0;
+
+  // remove remainder and correct
+  result = initial - (initial % 8) + correction;
+
+  return result;
+}
+
+
 function calculate() {
+  // get the base size from the control
   var base = document.getElementById('base').value;
+
+  // set font size factors
+  // TODO round to integers?
   sizes.body = base * 1;
   sizes.h1 = base * 3;
   sizes.h2 = base * 2;
   sizes.h3 = base * 1.5;
   sizes.h4 = base * .75;
-  sizes.subheading = base * 1.125;
+  sizes.subheading = base * 1;
 
-  console.log(sizes);
+  // set line-height factors
+  lineHeights.body = roundTo8(sizes.body * 1.75);
+  lineHeights.h1 = roundTo8(sizes.h1 * 1);
+  lineHeights.h2 = roundTo8(sizes.h2 * 1);
+  lineHeights.h3 = roundTo8(sizes.h3 * 1);
+  lineHeights.h4 = roundTo8(sizes.h4 * 1);
+  lineHeights.subheading = roundTo8(sizes.subheading * 1);
 
-  // document.getElementById('type-h1').style.fontSize = sizes.h1+'px';
+   // TODO margins
 
+  // loop through each type of element
   for (var key in sizes) {
-    if (sizes.hasOwnProperty(key)) {
-      console.log(key + " -> " + sizes[key]);
-      document.getElementById('type-'+key).style.fontSize = sizes[key]+'px';
-      document.getElementById('value-'+key).innerHTML = sizes[key]+'px';
+    // skip loop if the property is from prototype
+    if (!sizes.hasOwnProperty(key)) continue;
+
+    elements = document.getElementsByClassName('type-'+key);
+    valueSpans = document.getElementsByClassName('value-'+key);
+
+    // loop through value spans...
+    for (var i in valueSpans) {
+      // skip loop if the property is from prototype
+      if (!valueSpans.hasOwnProperty(i)) continue;
+
+      // ... apply the value to each span
+      valueSpans[i].innerHTML = key+':'+sizes[key]+'/'+lineHeights[key];
+    }
+
+    // loop through elements...
+    for (var i in elements) {
+      // skip loop if the property is from prototype
+      if (!elements.hasOwnProperty(i)) continue;
+
+      // ... apply the value to each span
+      elements[i].style.fontSize = sizes[key]+'px';
+      elements[i].style.lineHeight = lineHeights[key]+'px';
     }
   }
 }
@@ -33,13 +78,56 @@ window.onload = function() {
     </script>
   </head>
   <body>
-    <input type="number" id="base" value="16" onchange="calculate()"/>
+    <div class="controls">
+      <input type="number" id="base" value="16" onchange="calculate()"/>
+    </div>
 
-    <h1 id="type-h1">Heading 1 is <span id="value-h1"></span></h1>
-    <h2 id="type-h2">Heading 2 is <span id="value-h2"></span></h2>
-    <h3 id="type-h3">Heading 3 is <span id="value-h3"></span></h3>
-    <h4 id="type-h4">Heading 4 is <span id="value-h4"></span></h4>
-    <h5 id="type-subheading">Subheading is <span id="value-subheading"></span></h5>
-    <p id="type-body">Body and paragraph is <span id="value-body"></span>.</p>
+    <div class="canvas">
+      <h1 class="type-h1">
+        Recognition of Musical Elements
+        <span class="value-h1"></span>
+      </h1>
+      <h5 class="type-subheading">
+        The higher the intelligence, the keener the enjoyment
+        <span class="value-subheading"></span>
+      </h5>
+
+      <p class="type-body">
+        Music is dual in its nature; it is material as well as spiritual. Its material side we apprehend through the sense of hearing, and comprehend through the intellect; its spiritual side reaches us through the fancy (or imagination, so it be music of the highest class), and the emotional part of us. If the scope and capacity of the art, and the evolutionary processes which its history discloses (a record of which is preserved in its nomenclature), are to be understood, it is essential that this duality be kept in view. There is something so potent and elemental in the appeal which music makes that it is possible to derive pleasure from even an unwilling hearing or a hearing unaccompanied by effort at analysis;[Pg 16] but real appreciation of its beauty, which means recognition of the qualities which put it in the realm of art, is conditioned upon intelligent hearing. The higher the intelligence, the keener will be the enjoyment, if the former be directed to the spiritual side as well as the material.
+        <span class="value-body"></span>
+      </p>
+
+      <h2 class="type-h2">
+        Necessity of Intelligent Hearing
+        <span class="value-h2"></span>
+      </h2>
+      <h5 class="type-subheading">
+        Agreeably co-ordinated sounds.
+        <span class="value-subheading"></span>
+      </h5>
+
+      <p class="type-body">
+        So far as music is merely agreeably co-ordinated sounds, it may be reduced to mathematics and its practice to handicraft. But recognition of design is a condition precedent to the awakening of the fancy or the imagination, and to achieve such recognition there must be intelligent hearing in the first instance. For the purposes of this study, design may be held to be Form in its primary stages, the recognition of which is possible to every listener who is fond of music; it is not necessary that he be learned in the science. He need only be willing to let an intellectual process, which will bring its own reward, accompany the physical process of hearing.
+        <span class="value-body"></span>
+      </p>
+
+      <h3 class="type-h3">
+        Tones and Musical Material
+        <span class="value-h3"></span>
+      </h3>
+      <p class="type-body">
+        Without discrimination it is impossible to recognize even the crude materials[Pg 17] of music, for the first step is already a co-ordination of those materials. A tone becomes musical material only by association with another tone. We might hear it alone, study its quality, and determine its degree of acuteness or gravity (its pitch, as musicians say), but it can never become music so long as it remains isolated. When we recognize that it bears certain relationships with other tones in respect of time or tune (to use simple terms), it has become for us musical material. We do not need to philosophize about the nature of those relationships, but we must recognize their existence.
+        <span class="value-body"></span>
+      </p>
+
+      <h4 class="type-h4">
+        The Beginnings of Form
+        <span class="value-h4"></span>
+      </h4>
+      <p class="type-body">
+        Thus much we might hear if we were to let music go through our heads like water through a sieve. Yet the step from that degree of discrimination to a rudimentary analysis of Form is exceedingly short, and requires little more than a willingness to concentrate the attention and exercise the memory. Everyone is willing to do that much while looking at a picture. Who would look at a painting and rest satisfied with the impression made upon the sense of[Pg 18] sight by the colors merely? No one, surely. Yet so soon as we look, so as to discriminate between the outlines, to observe the relationship of figure to figure, we are indulging in intellectual exercise. If this be a condition precedent to the enjoyment of a picture (and it plainly is), how much more so is it in the case of music, which is intangible and evanescent, which cannot pause a moment for our contemplation without ceasing to be?
+        <span class="value-body"></span>
+      </p>
+    </div>
   </body>
 </html>

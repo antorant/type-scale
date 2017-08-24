@@ -1,4 +1,130 @@
-body {
-  font-family: sans-serif; }
+:root {
+  --c-shark: #1c1d21;
+  --c-charcoal: #2f323d;
+  --c-slate: #61646e;
+  --c-manatee: #90939e;
+  --c-silver: #e6e6eb;
+  --c-berlin: #f2f2f7;
+  --c-white: #ffffff;
 
-/*# sourceMappingURL=style.css.map */
+  --c-turquoise: #3aa1a1;
+  --c-red: #fe325e;
+  --c-green: #45e67d;
+
+  --controls-width: 320px;
+}
+
+body {
+  display: flex;
+  font-family: 'Georgia', serif;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.canvas {
+  width: calc( 100% - var(--controls-width) );
+  padding: 64px;
+}
+
+
+
+h1, h2, h3, h4 {
+  margin-bottom: 24px;
+  margin-top: 48px;
+}
+
+h1, h2, h5.type-subheading {
+  text-align: center;
+}
+
+h3, h4 {
+  margin-bottom: 16px;
+}
+
+h4 {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+h5.type-subheading {
+  font-style: italic;
+  font-weight: normal;
+  margin-bottom: 24px;
+  margin-top: -16px;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 48rem;
+}
+
+[class^="value-"] {
+  font-family: 'Andale Mono', monospace;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  padding: 8px;
+  right: calc(100% + 24px);
+  position: absolute;
+  text-align: right;
+  text-transform: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+[class^="value-"]::after {
+  content: "";
+  height: 8px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: rotate(45deg) translateY(-50%);
+  width: 8px;
+}
+
+[class^="value-"], [class^="value-"]::after {
+  background-color: var(--c-silver);
+}
+
+/* Controls */
+.controls {
+  padding: 32px;
+  width: var(--controls-width);
+  background-color: var(--c-berlin);
+}
+
+input {
+  border: none;
+  font-size: 32px;
+  padding: 16px;
+  width: 100%;
+}
+
+/*
+h1:hover,
+h2:hover,
+h3:hover,
+h4:hover,
+h5:hover,
+p:hover {
+  color: var(--c-turquoise);
+}
+*/
+
+h1:hover [class^="value-"], h1:hover [class^="value-"]::after,
+h2:hover [class^="value-"], h2:hover [class^="value-"]::after,
+h3:hover [class^="value-"], h3:hover [class^="value-"]::after,
+h4:hover [class^="value-"], h4:hover [class^="value-"]::after,
+h5:hover [class^="value-"], h5:hover [class^="value-"]::after,
+p:hover [class^="value-"], p:hover [class^="value-"]::after {
+  background-color: var(--c-turquoise);
+  color: var(--c-white);
+}
