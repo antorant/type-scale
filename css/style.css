@@ -11,7 +11,7 @@
   --c-red: #fe325e;
   --c-green: #45e67d;
 
-  --controls-width: 320px;
+  --controls-width: 160px;
 }
 
 body {
@@ -28,9 +28,9 @@ body {
 .canvas {
   width: calc( 100% - var(--controls-width) );
   padding: 64px;
+  background-image: url('../assets/img/grid-8.png');
+  background-size: 8px;
 }
-
-
 
 h1, h2 {
   margin-bottom: 24px;
