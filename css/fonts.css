@@ -1,0 +1,58 @@
+/* Custom fonts
+@font-face {
+  font-family: 'Text';
+  src: url('../assets/fonts/t-r.woff2') format('woff2'),
+       url('../assets/fonts/t-r.woff') format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Text';
+  src: url('../assets/fonts/t-r-i.woff2') format('woff2'),
+       url('../assets/fonts/t-r-i.woff') format('woff');
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Text';
+  src: url('../assets/fonts/t-m.woff2') format('woff2'),
+        url('../assets/fonts/t-m.woff') format('woff');
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Text';
+  src: url('../assets/fonts/t-m-i.woff2') format('woff2'),
+       url('../assets/fonts/t-m-i.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Display';
+  src: url('../assets/fonts/d-m.woff2') format('woff2'),
+       url('../assets/fonts/d-m.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Display';
+  src: url('../assets/fonts/d-b.woff2') format('woff2'),
+       url('../assets/fonts/d-b.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Text', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Display', sans-serif;
+  font-weight: 500;
+}
+*/

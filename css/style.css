@@ -25,6 +25,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input {
+  font-family: 'Andale Mono', monospace
+}
+
 .canvas {
   width: calc( 100% - var(--controls-width) );
   padding: 64px;
