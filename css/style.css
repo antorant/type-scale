@@ -70,6 +70,10 @@ p, h1, h2, h3, h4, h5 {
   width: 48rem;
 }
 
+a, a:link, a:visited {
+  color: inherit;
+}
+
 [class^="value-"] {
   font-family: 'Andale Mono', monospace;
   font-size: 12px;
@@ -110,6 +114,10 @@ input {
   border: none;
   font-size: 32px;
   padding: 16px;
+  width: 100%;
+}
+
+.controls p {
   width: 100%;
 }
 
